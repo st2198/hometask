@@ -1,9 +1,25 @@
 import React from 'react';
-import { render, screen, within, cleanup, act } from '@testing-library/react';
+import { render, screen, within, cleanup, act, fireEvent } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { Provider } from 'react-redux';
 import App from '.';
 import store from '../../store';
+import { State } from '../../types/ActivityLogEntry';
+import { initialState } from '../../store/slices/activityLogSlice';
+
+const localStorageMock = {
+  getItem: jest.fn(),
+  setItem: jest.fn(),
+  clear: jest.fn(),
+};
+
+Object.defineProperty(window, 'localStorage', {
+  value: localStorageMock
+});
+
+Object.defineProperty(window, 'localStorage', {
+  value: localStorageMock
+});
 
 describe('App', () => {
   beforeEach(() => {
@@ -19,7 +35,7 @@ describe('App', () => {
   const typeInTextbox = async (text: string) => {
     const input = screen.getByRole('textbox');
     await act(async () => {
-      await userEvent.type(input, text);
+      userEvent.type(input, text);
     });
     return input;
   };
@@ -44,7 +60,7 @@ describe('App', () => {
 
   test('allows users to select an activity type', async () => {
     await typeInTextbox('Meeting with client');
-    const radioButton = within(screen.getByTestId('phone')).getByRole('radio');
+    const radioButton = within(screen.getByTestId('message')).getByRole('radio');
     act(() => {
       userEvent.click(radioButton);
     });
@@ -69,5 +85,23 @@ describe('App', () => {
 
     const remainingActivities = await screen.findAllByText(/Milton Romaguera/);
     expect(remainingActivities.length).toEqual(activities.length - 1);
+  });
+
+  test('saves state to localStorage when the store updates', async () => {
+    const input = screen.getByRole('textbox');
+    const newMessage = 'New message';
+
+    await act(async () => {
+      fireEvent.change(input, { target: { value: newMessage } });
+    });
+
+    const expectedState: State = {
+      ...initialState,
+      currentActivityLog: {
+        message: newMessage,
+        type: initialState.currentActivityLog.type
+      },
+    };
+    expect(localStorageMock.setItem).toHaveBeenCalledWith('state', JSON.stringify(expectedState));
   });
 });

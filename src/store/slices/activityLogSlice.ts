@@ -30,7 +30,7 @@ const loadState = (): State | undefined => {
   }
 };
 
-const initialState: State = {
+export const initialState: State = {
   currentUser: 'You',
   currentActivityLog: {
     message: '',

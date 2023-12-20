@@ -17,8 +17,8 @@ const RadioButton = ({ value, onChange }: RadioButtonProps) => (
         alignItems: 'center',
         marginTop: '12px'
     }}>
-        <Radio icon={<ChatBubbleIcon />} value='message' checked={value === 'message'} handleChange={onChange} />
-        <Radio icon={<LocalPhoneIcon />} value='phone' checked={value === 'phone'} handleChange={onChange} testId='phone' />
+        <Radio icon={<ChatBubbleIcon />} value='message' checked={value === 'message'} handleChange={onChange} testId='message' />
+        <Radio icon={<LocalPhoneIcon />} value='phone' checked={value === 'phone'} handleChange={onChange} />
         <Radio icon={<LocalCafeIcon />} value='coffee' checked={value === 'coffee'} handleChange={onChange} />
         <Radio icon={<SportsBarIcon />} value='beer' checked={value === 'beer'} handleChange={onChange} />
         <Radio icon={<PersonIcon />} value='meeting note' checked={value === 'meeting note'} handleChange={onChange} />
