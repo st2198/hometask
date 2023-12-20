@@ -1,0 +1,6 @@
+.MenuMore-root {
+    position: absolute;
+    right: 12px;
+    top: 0;
+    transform: translateY(50%);
+}
