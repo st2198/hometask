@@ -1,9 +1,3 @@
-export type ActivityLogEntry = {
-    id: number;
-    content: string;
-    timestamp: Date;
-};
-
 export type ActivityType = 'message' | 'phone' | 'beer' | 'coffee' | 'meeting note';
 
 export interface ActivityLog {
@@ -12,10 +6,10 @@ export interface ActivityLog {
   message: string;
   date: string;
   contact: string;
+  currentUser: string;
 }
 
 export interface State {
-  currentUser: string;
   currentActivityLog: {
     message: string;
     type: ActivityType;

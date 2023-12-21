@@ -7,14 +7,16 @@ const activityLogs: ActivityLog[] = [
     type: 'meeting note',
     message: 'Add a more formal meetings.',
     date: `${new Date().getTime() - (3 * 24 * 60 * 60 * 1000)}`,
-    contact: 'Milton Romaguera'
+    contact: 'Milton Romaguera',
+    currentUser: 'You',
   },
   {
     id: 2,
     type: 'phone',
     message: 'Then we had follow-up phone call',
     date: `${new Date().getTime() - (5 * 24 * 60 * 60 * 1000)}`,
-    contact: 'Milton Romaguera'
+    contact: 'Milton Romaguera',
+    currentUser: 'You',
   },
 ];
 
@@ -31,7 +33,6 @@ const loadState = (): State | undefined => {
 };
 
 export const initialState: State = {
-  currentUser: 'You',
   currentActivityLog: {
     message: '',
     type: 'message'

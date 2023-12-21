@@ -8,7 +8,10 @@ const StyledButton = styled(Button)(() => ({
     color: "#fff",
     textTransform: "capitalize",
     paddingRight: "20px",
-    paddingLeft: "20px"
+    paddingLeft: "20px",
+    '&:hover': {
+        backgroundColor: '#37a393',
+    }
 }));
 
 

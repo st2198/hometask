@@ -13,3 +13,4 @@ export const icons = {
 }
 
 export const currentContact = 'Milton Romaguera';
+export const currentUser = 'You';
